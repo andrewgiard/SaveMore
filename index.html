@@ -47,11 +47,20 @@
             gap: 15px;
             margin-top: 20px;
         }
-        .dropdown {
-            position: relative;
-            display: inline-block;
+        .car-insurance-section {
+            text-align: center;
+            margin-top: 10px;
         }
-        .dropbtn {
+        .car-insurance-buttons {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .show {
+            display: flex !important; /* When active, show the buttons */
+        }
+        button {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -66,29 +75,11 @@
             width: 150px;
             transition: 0.3s ease;
         }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: white;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-            border-radius: 5px;
-            z-index: 1;
-            left: 50%;
-            transform: translateX(-50%);
+        button img {
+            margin-bottom: 5px;
         }
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: center;
-        }
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
+        button:hover {
+            background: #f4f4f4;
         }
     </style>
 </head>
@@ -97,7 +88,7 @@
         <h1>Find the Best Deals with SmartSaver</h1>
         <p>Compare insurance, groceries, phone bills, gas, and more to save money.</p>
 
-        <!-- New Category Buttons -->
+        <!-- Category Buttons -->
         <div class="category-buttons">
             <button>
                 <img src="icons/health-icon.png" width="128" height="128" alt="Health Insurance">
@@ -109,16 +100,26 @@
                 Groceries
             </button>
 
-            <!-- Car Insurance Dropdown -->
-            <div class="dropdown">
-                <button class="dropbtn">
+            <!-- Car Insurance Section -->
+            <div class="car-insurance-section">
+                <button onclick="toggleInsuranceOptions()">
                     <img src="icons/car-insurance-icon.png" width="128" height="128" alt="Car Insurance">
                     Car Insurance
                 </button>
-                <div class="dropdown-content">
-                    <a href="https://www.thezebra.com/car-insurance/" target="_blank" rel="noopener noreferrer">Zebra Quote</a>
-                    <a href="https://www.insurify.com/car-insurance" target="_blank" rel="noopener noreferrer">Insurify Quote</a>
-                    <a href="https://www.gabi.com/" target="_blank" rel="noopener noreferrer">Gabi Quote</a>
+
+                <!-- Car Insurance Quote Providers (Hidden by Default) -->
+                <div id="insuranceOptions" class="car-insurance-buttons">
+                    <a href="https://www.thezebra.com/car-insurance/" target="_blank" rel="noopener noreferrer">
+                        <button>Zebra Quote</button>
+                    </a>
+
+                    <a href="https://www.insurify.com/car-insurance" target="_blank" rel="noopener noreferrer">
+                        <button>Insurify Quote</button>
+                    </a>
+
+                    <a href="https://www.gabi.com/" target="_blank" rel="noopener noreferrer">
+                        <button>Gabi Quote</button>
+                    </a>
                 </div>
             </div>
 
@@ -133,5 +134,12 @@
             </button>
         </div>
     </div>
+
+    <script>
+        function toggleInsuranceOptions() {
+            var options = document.getElementById("insuranceOptions");
+            options.classList.toggle("show");
+        }
+    </script>
 </body>
 </html>
