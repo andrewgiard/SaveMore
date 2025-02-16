@@ -1,11 +1,4 @@
-{
-  "name": "SaveMore App",
-  "short_name": "SaveMore",
-  "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ff6600",
-  "icons": [
+"icons": [
     {
       "src": "icons/icon-192x192.png",
       "sizes": "192x192",
@@ -22,13 +15,4 @@
       "type": "image/png",
       "purpose": "any"
     }
-  ],
-  "screenshots": [
-    {
-      "src": "icons/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "form_factor": "wide"
-    }
-  ]
-}
+]
