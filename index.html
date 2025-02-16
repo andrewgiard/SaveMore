@@ -47,14 +47,11 @@
             gap: 15px;
             margin-top: 20px;
         }
-        .car-insurance-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
+        .dropdown {
+            position: relative;
+            display: inline-block;
         }
-        button {
+        .dropbtn {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -66,14 +63,32 @@
             cursor: pointer;
             font-size: 16px;
             color: #333;
-            width: 120px;
+            width: 150px;
             transition: 0.3s ease;
         }
-        button img {
-            margin-bottom: 5px;
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            z-index: 1;
+            left: 50%;
+            transform: translateX(-50%);
         }
-        button:hover {
-            background: #f4f4f4;
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
     </style>
 </head>
@@ -94,28 +109,17 @@
                 Groceries
             </button>
 
-            <!-- Car Insurance Section with 3 Quote Providers -->
-            <div class="car-insurance-buttons">
-                <a href="https://www.thezebra.com/car-insurance/" target="_blank" rel="noopener noreferrer">
-                    <button>
-                        <img src="icons/car-insurance-icon.png" width="128" height="128" alt="Car Insurance">
-                        Zebra Quote
-                    </button>
-                </a>
-
-                <a href="https://www.insurify.com/car-insurance" target="_blank" rel="noopener noreferrer">
-                    <button>
-                        <img src="icons/car-insurance-icon.png" width="128" height="128" alt="Car Insurance">
-                        Insurify Quote
-                    </button>
-                </a>
-
-                <a href="https://www.gabi.com/" target="_blank" rel="noopener noreferrer">
-                    <button>
-                        <img src="icons/car-insurance-icon.png" width="128" height="128" alt="Car Insurance">
-                        Gabi Quote
-                    </button>
-                </a>
+            <!-- Car Insurance Dropdown -->
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <img src="icons/car-insurance-icon.png" width="128" height="128" alt="Car Insurance">
+                    Car Insurance
+                </button>
+                <div class="dropdown-content">
+                    <a href="https://www.thezebra.com/car-insurance/" target="_blank" rel="noopener noreferrer">Zebra Quote</a>
+                    <a href="https://www.insurify.com/car-insurance" target="_blank" rel="noopener noreferrer">Insurify Quote</a>
+                    <a href="https://www.gabi.com/" target="_blank" rel="noopener noreferrer">Gabi Quote</a>
+                </div>
             </div>
 
             <button>
