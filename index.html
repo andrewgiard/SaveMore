@@ -28,7 +28,10 @@
             color: #666;
         }
         .cta {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             margin-top: 20px;
             padding: 12px 25px;
             background: #ff6600;
@@ -36,6 +39,10 @@
             text-decoration: none;
             font-size: 20px;
             border-radius: 5px;
+        }
+        .cta img {
+            width: 30px;
+            height: auto;
         }
         .cta:hover {
             background: #cc5500;
@@ -46,7 +53,9 @@
     <div class="container">
         <h1>Find the Best Car Insurance Deals</h1>
         <p>Compare insurance quotes from top providers and save money on your car insurance today.</p>
-        <a href="https://www.thezebra.com/car-insurance/" class="cta" target="_blank" rel="noopener noreferrer">Get Started</a>
+        <a href="https://www.thezebra.com/car-insurance/" class="cta" target="_blank" rel="noopener noreferrer">
+            <img src="https://cdn-icons-png.flaticon.com/512/2899/2899543.png" alt="Car Icon"> Get Started
+        </a>
     </div>
 </body>
 </html>
