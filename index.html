@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compare Car Insurance - Find the Best Deals</title>
+    <title>SmartSaver - Find the Best Deals</title>
 
     <!-- Link to Manifest File (For PWA Installation) -->
     <link rel="manifest" href="manifest.json">
@@ -53,15 +53,71 @@
         .cta:hover {
             background: #cc5500;
         }
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
+            width: 120px;
+            transition: 0.3s ease;
+        }
+        button img {
+            margin-bottom: 5px;
+        }
+        button:hover {
+            background: #f4f4f4;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Find the Best Car Insurance Deals</h1>
-        <p>Compare insurance quotes from top providers and save money today.</p>
+        <h1>Find the Best Deals with SmartSaver</h1>
+        <p>Compare insurance, groceries, phone bills, gas, and more to save money.</p>
         <a href="https://www.thezebra.com/car-insurance/" class="cta" target="_blank" rel="noopener noreferrer">
             Get Started
         </a>
+
+        <!-- New Category Buttons -->
+        <div class="category-buttons">
+            <button>
+                <img src="icons/health-icon.png" width="64" height="64" alt="Health Insurance">
+                Health Insurance
+            </button>
+
+            <button>
+                <img src="icons/grocery-icon.png" width="64" height="64" alt="Groceries">
+                Groceries
+            </button>
+
+            <button>
+                <img src="icons/car-insurance-icon.png" width="64" height="64" alt="Car Insurance">
+                Car Insurance
+            </button>
+
+            <button>
+                <img src="icons/gas-icon.png" width="64" height="64" alt="Gas Savings">
+                Gas Savings
+            </button>
+
+            <button>
+                <img src="icons/phone-bill-icon.png" width="64" height="64" alt="Phone Bills">
+                Phone Bills
+            </button>
+        </div>
     </div>
 </body>
 </html>
