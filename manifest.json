@@ -1,4 +1,11 @@
-"icons": [
+{
+  "name": "SmartSaver App",
+  "short_name": "SmartSaver",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff6600",
+  "icons": [
     {
       "src": "icons/icon-192x192.png",
       "sizes": "192x192",
@@ -12,7 +19,7 @@
     {
       "src": "icons/icon-144x144.png",
       "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     }
-]
+  ]
+}
