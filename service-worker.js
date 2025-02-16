@@ -8,6 +8,17 @@ self.addEventListener('install', event => {
                 '/icons/icon-192x192.png',
                 '/icons/icon-512x512.png'
             ]);
+        }).then(() => self.skipWaiting()) // Forces the service worker to take control
+    );
+});
+
+self.addEventListener('activate', event => {
+    event.waitUntil(
+        caches.keys().then(keys => {
+            return Promise.all(
+                keys.filter(key => key !== 'savemore-cache-v1')
+                    .map(key => caches.delete(key))
+            );
         })
     );
 });
