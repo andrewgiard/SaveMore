@@ -47,19 +47,6 @@
             gap: 15px;
             margin-top: 20px;
         }
-        .car-insurance-section {
-            text-align: center;
-            margin-top: 10px;
-        }
-        .car-insurance-buttons {
-            display: none; /* Hidden by default */
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .show {
-            display: flex !important; /* When active, show the buttons */
-        }
         button {
             display: flex;
             flex-direction: column;
@@ -100,28 +87,13 @@
                 Groceries
             </button>
 
-            <!-- Car Insurance Section -->
-            <div class="car-insurance-section">
-                <button onclick="toggleInsuranceOptions()">
+            <!-- Car Insurance Button (Links to car-insurance.html) -->
+            <a href="car-insurance.html">
+                <button>
                     <img src="icons/car-insurance-icon.png" width="128" height="128" alt="Car Insurance">
                     Car Insurance
                 </button>
-
-                <!-- Car Insurance Quote Providers (Hidden by Default) -->
-                <div id="insuranceOptions" class="car-insurance-buttons">
-                    <a href="https://www.thezebra.com/car-insurance/" target="_blank" rel="noopener noreferrer">
-                        <button>Zebra Quote</button>
-                    </a>
-
-                    <a href="https://www.insurify.com/car-insurance" target="_blank" rel="noopener noreferrer">
-                        <button>Insurify Quote</button>
-                    </a>
-
-                    <a href="https://www.gabi.com/" target="_blank" rel="noopener noreferrer">
-                        <button>Gabi Quote</button>
-                    </a>
-                </div>
-            </div>
+            </a>
 
             <button>
                 <img src="icons/gas-icon.png" width="128" height="128" alt="Gas Savings">
@@ -134,12 +106,5 @@
             </button>
         </div>
     </div>
-
-    <script>
-        function toggleInsuranceOptions() {
-            var options = document.getElementById("insuranceOptions");
-            options.classList.toggle("show");
-        }
-    </script>
 </body>
 </html>
