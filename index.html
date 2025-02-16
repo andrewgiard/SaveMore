@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compare Car Insurance - Find the Best Deals</title>
-    
+
     <!-- Link to Manifest File (For PWA Installation) -->
-    <link rel="manifest" href="/manifest.json">
-    
+    <link rel="manifest" href="manifest.json">
+
     <!-- Register Service Worker -->
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then(registration => console.log('Service Worker registered', registration))
-                .catch(error => console.log('Service Worker registration failed', error));
+            navigator.serviceWorker.register('service-worker.js')
+                .then(registration => console.log('Service Worker registered:', registration))
+                .catch(error => console.log('Service Worker registration failed:', error));
         }
     </script>
 
@@ -41,10 +41,7 @@
             color: #666;
         }
         .cta {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            display: inline-block;
             margin-top: 20px;
             padding: 12px 25px;
             background: #ff6600;
@@ -52,10 +49,6 @@
             text-decoration: none;
             font-size: 20px;
             border-radius: 5px;
-        }
-        .cta img {
-            width: 30px;
-            height: auto;
         }
         .cta:hover {
             background: #cc5500;
@@ -65,10 +58,11 @@
 <body>
     <div class="container">
         <h1>Find the Best Car Insurance Deals</h1>
-        <p>Compare insurance quotes from top providers and save money on your car insurance today.</p>
+        <p>Compare insurance quotes from top providers and save money today.</p>
         <a href="https://www.thezebra.com/car-insurance/" class="cta" target="_blank" rel="noopener noreferrer">
-            <img src="https://cdn-icons-png.flaticon.com/512/744/744465.png" alt="Car Icon"> Get Started
+            Get Started
         </a>
     </div>
 </body>
 </html>
+
