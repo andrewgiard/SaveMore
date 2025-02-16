@@ -47,6 +47,13 @@
             gap: 15px;
             margin-top: 20px;
         }
+        .car-insurance-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
         button {
             display: flex;
             flex-direction: column;
@@ -78,27 +85,46 @@
         <!-- New Category Buttons -->
         <div class="category-buttons">
             <button>
-                <img src="icons/health-icon.png" width="64" height="64" alt="Health Insurance">
+                <img src="icons/health-icon.png" width="128" height="128" alt="Health Insurance">
                 Health Insurance
             </button>
 
             <button>
-                <img src="icons/grocery-icon.png" width="64" height="64" alt="Groceries">
+                <img src="icons/grocery-icon.png" width="128" height="128" alt="Groceries">
                 Groceries
             </button>
 
-            <button>
-                <img src="icons/car-insurance-icon.png" width="64" height="64" alt="Car Insurance">
-                Car Insurance
-            </button>
+            <!-- Car Insurance Section with 3 Quote Providers -->
+            <div class="car-insurance-buttons">
+                <a href="https://www.thezebra.com/car-insurance/" target="_blank" rel="noopener noreferrer">
+                    <button>
+                        <img src="icons/car-insurance-icon.png" width="128" height="128" alt="Car Insurance">
+                        Zebra Quote
+                    </button>
+                </a>
+
+                <a href="https://www.insurify.com/car-insurance" target="_blank" rel="noopener noreferrer">
+                    <button>
+                        <img src="icons/car-insurance-icon.png" width="128" height="128" alt="Car Insurance">
+                        Insurify Quote
+                    </button>
+                </a>
+
+                <a href="https://www.gabi.com/" target="_blank" rel="noopener noreferrer">
+                    <button>
+                        <img src="icons/car-insurance-icon.png" width="128" height="128" alt="Car Insurance">
+                        Gabi Quote
+                    </button>
+                </a>
+            </div>
 
             <button>
-                <img src="icons/gas-icon.png" width="64" height="64" alt="Gas Savings">
+                <img src="icons/gas-icon.png" width="128" height="128" alt="Gas Savings">
                 Gas Savings
             </button>
 
             <button>
-                <img src="icons/phone-bill-icon.png" width="64" height="64" alt="Phone Bills">
+                <img src="icons/phone-bill-icon.png" width="128" height="128" alt="Phone Bills">
                 Phone Bills
             </button>
         </div>
