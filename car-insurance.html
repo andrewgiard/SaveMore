@@ -6,13 +6,13 @@
     <title>Car Insurance Quotes - SmartSaver</title>
 
     <style>
-        /* Apply a soft blue gradient background */
+        /* Apply a warm blue gradient background */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             text-align: center;
-            background: linear-gradient(to bottom, #A7C7E7, #E3FDFD); 
+            background: linear-gradient(to bottom, #5A7D9A, #AEC0CF); 
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -29,14 +29,14 @@
         }
 
         h1 {
-            color: #005F73; /* Deep Blue */
+            color: #2E4756; /* Deep Muted Blue */
             font-size: 24px;
             margin-bottom: 10px;
         }
 
         p {
             font-size: 18px;
-            color: #2F4F4F;
+            color: #4A4A4A;
         }
 
         /* Quote Buttons */
@@ -50,4 +50,56 @@
 
         /* Button Styling */
         button {
-       
+            background: linear-gradient(to right, #1F7A5C, #146B4A); /* Soft Emerald Green */
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 18px;
+            color: white;
+            width: 200px;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #146B4A, #0E5940);
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #1F7A5C;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+
+        .back-button:hover {
+            background: #146B4A;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Compare Car Insurance Quotes</h1>
+        <p>Select a provider to get started:</p>
+
+        <div class="quote-buttons">
+            <a href="https://www.thezebra.com/car-insurance/" target="_blank">
+                <button>Zebra Quote</button>
+            </a>
+            <a href="https://www.insurify.com/car-insurance" target="_blank">
+                <button>Insurify Quote</button>
+            </a>
+            <a href="https://www.gabi.com/" target="_blank">
+                <button>Gabi Quote</button>
+            </a>
+        </div>
+
+        <a href="index.html" class="back-button">Back to Home</a>
+    </div>
+</body>
+</html>
