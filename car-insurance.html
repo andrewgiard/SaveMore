@@ -109,12 +109,25 @@
         .back-button:hover {
             background: linear-gradient(to right, #1E8E50, #166F3C);
         }
+
+        /* Privacy Notice */
+        .privacy-notice {
+            font-size: 14px;
+            color: #4A4A4A;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Compare Car Insurance Quotes</h1>
         <p>Enter your details manually or upload your insurance card for auto-fill:</p>
+
+        <!-- Privacy Notice -->
+        <p class="privacy-notice">
+            🔒 <b>Privacy Notice:</b> Your uploaded image is <b>not stored or sent to any external servers.</b> 
+            Text extraction happens locally on your device. You can edit or remove any extracted details before submitting.
+        </p>
 
         <!-- Image Upload for OCR -->
         <input type="file" id="insuranceCard" accept="image/*">
