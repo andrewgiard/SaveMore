@@ -26,6 +26,7 @@
             background: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
+            text-align: center;
         }
 
         h1 {
@@ -39,33 +40,64 @@
             color: #4A4A4A;
         }
 
-        /* Quote Buttons */
-        .quote-buttons {
+        /* Form Styling */
+        .quote-form {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             margin-top: 20px;
         }
 
-        /* BUTTON STYLING (EXACT MATCH TO INDEX.HTML) */
-        button {
+        input, select {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Submit Button */
+        .submit-btn {
             background: linear-gradient(to right, #2BAE66, #1E8E50); /* Brighter Emerald Green */
+            color: white;
             border: none;
             border-radius: 10px;
             padding: 12px 20px;
-            cursor: pointer;
             font-size: 18px;
-            color: white;
-            width: 250px;
-            transition: 0.3s ease;
+            cursor: pointer;
+            width: 200px;
+            margin-top: 10px;
         }
 
-        button:hover {
+        .submit-btn:hover {
             background: linear-gradient(to right, #1E8E50, #166F3C);
         }
 
-        /* Back Button (Exact Match to Index.html Button Styling) */
+        /* Results Section */
+        .quote-results {
+            display: none;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #5A7D9A;
+            color: white;
+        }
+
+        /* Back Button */
         .back-button {
             display: inline-block;
             margin-top: 20px;
@@ -86,21 +118,68 @@
 <body>
     <div class="container">
         <h1>Compare Car Insurance Quotes</h1>
-        <p>Select a provider to get started:</p>
+        <p>Enter your details to find the best deals:</p>
 
-        <div class="quote-buttons">
-            <a href="https://www.thezebra.com/car-insurance/" target="_blank">
-                <button>🔹 Zebra Quote</button>
-            </a>
-            <a href="https://www.insurify.com/car-insurance" target="_blank">
-                <button>📋 Insurify Quote</button>
-            </a>
-            <a href="https://www.gabi.com/" target="_blank">
-                <button>🚗 Gabi Quote</button>
-            </a>
+        <!-- Form for User Input -->
+        <form class="quote-form" id="insuranceForm">
+            <input type="text" id="zipCode" placeholder="Enter Zip Code" required>
+            <input type="text" id="carMake" placeholder="Car Make (e.g., Toyota)" required>
+            <input type="text" id="carModel" placeholder="Car Model (e.g., Camry)" required>
+            <input type="number" id="carYear" placeholder="Car Year (e.g., 2021)" required>
+            <select id="coverageType" required>
+                <option value="" disabled selected>Select Coverage Type</option>
+                <option value="Liability">Liability</option>
+                <option value="Full Coverage">Full Coverage</option>
+            </select>
+            <input type="text" id="currentProvider" placeholder="Current Insurance Provider (Optional)">
+            <input type="number" id="currentPrice" placeholder="Current Monthly Payment (Optional)">
+            <button type="button" class="submit-btn" onclick="getMockQuotes()">Get Quotes</button>
+        </form>
+
+        <!-- Quote Results (Hidden Initially) -->
+        <div class="quote-results" id="quoteResults">
+            <h2>Best Available Quotes:</h2>
+            <table>
+                <tr>
+                    <th>Provider</th>
+                    <th>Monthly Price</th>
+                    <th>Coverage</th>
+                </tr>
+                <tbody id="quoteTableBody">
+                </tbody>
+            </table>
         </div>
 
         <a href="index.html" class="back-button">⬅ Back to Home</a>
     </div>
+
+    <script>
+        function getMockQuotes() {
+            // Simulating API response
+            const mockData = [
+                { provider: "Zebra", monthly_price: 98, coverage: "Full Coverage" },
+                { provider: "Gabi", monthly_price: 92, coverage: "Full Coverage" },
+                { provider: "Insurify", monthly_price: 100, coverage: "Full Coverage" }
+            ];
+
+            // Display the results section
+            document.getElementById("quoteResults").style.display = "block";
+
+            // Clear existing table data
+            const tableBody = document.getElementById("quoteTableBody");
+            tableBody.innerHTML = "";
+
+            // Populate the table with mock data
+            mockData.forEach(quote => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${quote.provider}</td>
+                    <td>$${quote.monthly_price}</td>
+                    <td>${quote.coverage}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+    </script>
 </body>
 </html>
