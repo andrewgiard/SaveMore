@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Insurance Quotes - SmartSaver</title>
 
+    <!-- Include OCR Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/2.1.4/tesseract.min.js"></script>
 
     <style>
@@ -109,25 +110,12 @@
         .back-button:hover {
             background: linear-gradient(to right, #1E8E50, #166F3C);
         }
-
-        /* Privacy Notice */
-        .privacy-notice {
-            font-size: 14px;
-            color: #4A4A4A;
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Compare Car Insurance Quotes</h1>
         <p>Enter your details manually or upload your insurance card for auto-fill:</p>
-
-        <!-- Privacy Notice -->
-        <p class="privacy-notice">
-            🔒 <b>Privacy Notice:</b> Your uploaded image is <b>not stored or sent to any external servers.</b> 
-            Text extraction happens locally on your device. You can edit or remove any extracted details before submitting.
-        </p>
 
         <!-- Image Upload for OCR -->
         <input type="file" id="insuranceCard" accept="image/*">
@@ -173,22 +161,40 @@
                 ).then(({ data: { text } }) => {
                     console.log("OCR Output:", text);
 
-                    // Extract insurance provider
-                    const providerMatch = text.match(/(Geico|Progressive|State Farm|Allstate|USAA|Liberty Mutual|Nationwide|Farmers)/i);
+                    // Extract provider
+                    const providerMatch = text.match(/(Geico|Progressive|State Farm|Allstate|USAA|Liberty Mutual|Nationwide|Farmers|Alfa Insurance|Auto Insurance)/i);
                     if (providerMatch) {
                         document.getElementById("insuranceProvider").value = providerMatch[0];
                     }
 
+                    // Extract policy number
+                    const policyMatch = text.match(/\b(\d{6,12})\b/);
+                    if (policyMatch) {
+                        document.getElementById("policyNumber").value = policyMatch[0];
+                    }
+
                     // Extract coverage type
-                    const coverageMatch = text.match(/(Full Coverage|Liability)/i);
+                    const coverageMatch = text.match(/(Full\s*Coverage|Liability\s*Only)/i);
                     if (coverageMatch) {
                         document.getElementById("coverageType").value = coverageMatch[0];
                     }
 
-                    // Extract policy number (example pattern for a 10-digit number)
-                    const policyMatch = text.match(/\b\d{10}\b/);
-                    if (policyMatch) {
-                        document.getElementById("policyNumber").value = policyMatch[0];
+                    // Extract car year
+                    const yearMatch = text.match(/\b(19\d{2}|20\d{2})\b/);
+                    if (yearMatch) {
+                        document.getElementById("carYear").value = yearMatch[0];
+                    }
+
+                    // Extract car make
+                    const makeMatch = text.match(/(Toyota|Ford|Chevrolet|Honda|Nissan|Hyundai|Jeep|Subaru|Volkswagen|Kia|Mazda|Dodge)/i);
+                    if (makeMatch) {
+                        document.getElementById("carMake").value = makeMatch[0];
+                    }
+
+                    // Extract car model
+                    const modelMatch = text.match(/(Corolla|Civic|F-150|Camry|Accord|Escape|Rav4|Silverado|Altima|Cherokee|Wrangler|Tucson|Jetta|Mazda3)/i);
+                    if (modelMatch) {
+                        document.getElementById("carModel").value = modelMatch[0];
                     }
 
                 }).catch(error => {
