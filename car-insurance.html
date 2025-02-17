@@ -21,7 +21,7 @@
 
         /* White Content Box */
         .container {
-            max-width: 600px;
+            max-width: 650px;
             padding: 20px;
             background: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -50,7 +50,7 @@
         }
 
         input, select {
-            width: 80%;
+            width: 90%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -66,7 +66,7 @@
             padding: 12px 20px;
             font-size: 18px;
             cursor: pointer;
-            width: 200px;
+            width: 220px;
             margin-top: 10px;
         }
 
@@ -120,12 +120,12 @@
         <h1>Compare Car Insurance Quotes</h1>
         <p>Enter your details to find the best deals:</p>
 
-        <!-- Form for User Input -->
+        <!-- Expanded Form for Better Quotes -->
         <form class="quote-form" id="insuranceForm">
             <input type="text" id="zipCode" placeholder="Enter Zip Code" required>
             <input type="text" id="carMake" placeholder="Car Make (e.g., Toyota)" required>
-            <input type="text" id="carModel" placeholder="Car Model (e.g., Camry)" required>
-            <input type="number" id="carYear" placeholder="Car Year (e.g., 2021)" required>
+            <input type="text" id="carModel" placeholder="Car Model (e.g., Corolla XLE)" required>
+            <input type="number" id="carYear" placeholder="Car Year (e.g., 2017)" required>
             <select id="coverageType" required>
                 <option value="" disabled selected>Select Coverage Type</option>
                 <option value="Liability">Liability</option>
@@ -133,6 +133,30 @@
             </select>
             <input type="text" id="currentProvider" placeholder="Current Insurance Provider (Optional)">
             <input type="number" id="currentPrice" placeholder="Current Monthly Payment (Optional)">
+
+            <select id="drivingHistory" required>
+                <option value="" disabled selected>Driving History</option>
+                <option value="Clean">No Accidents or Tickets</option>
+                <option value="Minor">Minor Accident or Ticket</option>
+                <option value="Major">Major Accident or Multiple Tickets</option>
+            </select>
+
+            <input type="number" id="annualMileage" placeholder="Annual Mileage (e.g., 12000)" required>
+
+            <select id="usageType" required>
+                <option value="" disabled selected>Primary Use</option>
+                <option value="Personal">Personal</option>
+                <option value="Business">Business</option>
+                <option value="Commute">Commute</option>
+            </select>
+
+            <select id="deductible" required>
+                <option value="" disabled selected>Deductible Amount</option>
+                <option value="500">$500</option>
+                <option value="1000">$1000</option>
+                <option value="2000">$2000</option>
+            </select>
+
             <button type="button" class="submit-btn" onclick="getMockQuotes()">Get Quotes</button>
         </form>
 
