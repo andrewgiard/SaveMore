@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Insurance Quotes - SmartSaver</title>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/2.1.4/tesseract.min.js"></script>
+
     <style>
         /* Apply a warm blue gradient background */
         body {
@@ -57,9 +59,26 @@
             font-size: 16px;
         }
 
+        /* Upload Button */
+        .upload-btn {
+            background: linear-gradient(to right, #2BAE66, #1E8E50); /* Emerald Green */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 220px;
+            margin-top: 10px;
+        }
+
+        .upload-btn:hover {
+            background: linear-gradient(to right, #1E8E50, #166F3C);
+        }
+
         /* Submit Button */
         .submit-btn {
-            background: linear-gradient(to right, #2BAE66, #1E8E50); /* Brighter Emerald Green */
+            background: linear-gradient(to right, #2BAE66, #1E8E50);
             color: white;
             border: none;
             border-radius: 10px;
@@ -72,29 +91,6 @@
 
         .submit-btn:hover {
             background: linear-gradient(to right, #1E8E50, #166F3C);
-        }
-
-        /* Results Section */
-        .quote-results {
-            display: none;
-            margin-top: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-
-        th {
-            background: #5A7D9A;
-            color: white;
         }
 
         /* Back Button */
@@ -118,91 +114,76 @@
 <body>
     <div class="container">
         <h1>Compare Car Insurance Quotes</h1>
-        <p>Enter your details to find the best deals:</p>
+        <p>Enter your details manually or upload your insurance card for auto-fill:</p>
+
+        <!-- Image Upload for OCR -->
+        <input type="file" id="insuranceCard" accept="image/*">
+        <button class="upload-btn" onclick="scanInsuranceCard()">📷 Scan Insurance Card</button>
 
         <!-- Expanded Form for Better Quotes -->
         <form class="quote-form" id="insuranceForm">
+            <input type="text" id="insuranceProvider" placeholder="Insurance Provider" required>
+            <input type="text" id="policyNumber" placeholder="Policy Number (Optional)">
+            <input type="text" id="coverageType" placeholder="Coverage Type (Liability/Full Coverage)" required>
             <input type="text" id="zipCode" placeholder="Enter Zip Code" required>
             <input type="text" id="carMake" placeholder="Car Make (e.g., Toyota)" required>
             <input type="text" id="carModel" placeholder="Car Model (e.g., Corolla XLE)" required>
             <input type="number" id="carYear" placeholder="Car Year (e.g., 2017)" required>
-            <select id="coverageType" required>
-                <option value="" disabled selected>Select Coverage Type</option>
-                <option value="Liability">Liability</option>
-                <option value="Full Coverage">Full Coverage</option>
-            </select>
-            <input type="text" id="currentProvider" placeholder="Current Insurance Provider (Optional)">
-            <input type="number" id="currentPrice" placeholder="Current Monthly Payment (Optional)">
-
-            <select id="drivingHistory" required>
-                <option value="" disabled selected>Driving History</option>
-                <option value="Clean">No Accidents or Tickets</option>
-                <option value="Minor">Minor Accident or Ticket</option>
-                <option value="Major">Major Accident or Multiple Tickets</option>
-            </select>
-
-            <input type="number" id="annualMileage" placeholder="Annual Mileage (e.g., 12000)" required>
-
-            <select id="usageType" required>
-                <option value="" disabled selected>Primary Use</option>
-                <option value="Personal">Personal</option>
-                <option value="Business">Business</option>
-                <option value="Commute">Commute</option>
-            </select>
-
-            <select id="deductible" required>
-                <option value="" disabled selected>Deductible Amount</option>
-                <option value="500">$500</option>
-                <option value="1000">$1000</option>
-                <option value="2000">$2000</option>
-            </select>
 
             <button type="button" class="submit-btn" onclick="getMockQuotes()">Get Quotes</button>
         </form>
-
-        <!-- Quote Results (Hidden Initially) -->
-        <div class="quote-results" id="quoteResults">
-            <h2>Best Available Quotes:</h2>
-            <table>
-                <tr>
-                    <th>Provider</th>
-                    <th>Monthly Price</th>
-                    <th>Coverage</th>
-                </tr>
-                <tbody id="quoteTableBody">
-                </tbody>
-            </table>
-        </div>
 
         <a href="index.html" class="back-button">⬅ Back to Home</a>
     </div>
 
     <script>
-        function getMockQuotes() {
-            // Simulating API response
-            const mockData = [
-                { provider: "Zebra", monthly_price: 98, coverage: "Full Coverage" },
-                { provider: "Gabi", monthly_price: 92, coverage: "Full Coverage" },
-                { provider: "Insurify", monthly_price: 100, coverage: "Full Coverage" }
-            ];
+        function scanInsuranceCard() {
+            const fileInput = document.getElementById('insuranceCard');
+            const file = fileInput.files[0];
 
-            // Display the results section
-            document.getElementById("quoteResults").style.display = "block";
+            if (!file) {
+                alert("Please upload an image first.");
+                return;
+            }
 
-            // Clear existing table data
-            const tableBody = document.getElementById("quoteTableBody");
-            tableBody.innerHTML = "";
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const image = new Image();
+                image.src = event.target.result;
 
-            // Populate the table with mock data
-            mockData.forEach(quote => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${quote.provider}</td>
-                    <td>$${quote.monthly_price}</td>
-                    <td>${quote.coverage}</td>
-                `;
-                tableBody.appendChild(row);
-            });
+                Tesseract.recognize(
+                    image.src,
+                    'eng',
+                    {
+                        logger: m => console.log(m)
+                    }
+                ).then(({ data: { text } }) => {
+                    console.log("OCR Output:", text);
+
+                    // Extract insurance provider
+                    const providerMatch = text.match(/(Geico|Progressive|State Farm|Allstate|USAA|Liberty Mutual|Nationwide|Farmers)/i);
+                    if (providerMatch) {
+                        document.getElementById("insuranceProvider").value = providerMatch[0];
+                    }
+
+                    // Extract coverage type
+                    const coverageMatch = text.match(/(Full Coverage|Liability)/i);
+                    if (coverageMatch) {
+                        document.getElementById("coverageType").value = coverageMatch[0];
+                    }
+
+                    // Extract policy number (example pattern for a 10-digit number)
+                    const policyMatch = text.match(/\b\d{10}\b/);
+                    if (policyMatch) {
+                        document.getElementById("policyNumber").value = policyMatch[0];
+                    }
+
+                }).catch(error => {
+                    console.error("OCR Error:", error);
+                });
+            };
+
+            reader.readAsDataURL(file);
         }
     </script>
 </body>
