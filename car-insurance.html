@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Insurance Quotes - SmartSaver</title>
 
-    <!-- Include OCR Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/2.1.4/tesseract.min.js"></script>
 
     <style>
@@ -39,8 +38,16 @@
         }
 
         p {
-            font-size: 18px;
+            font-size: 16px;
             color: #4A4A4A;
+        }
+
+        /* Privacy Notice */
+        .privacy-notice {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            text-align: left;
         }
 
         /* Form Styling */
@@ -117,8 +124,14 @@
         <h1>Compare Car Insurance Quotes</h1>
         <p>Enter your details manually or upload your insurance card for auto-fill:</p>
 
+        <!-- Privacy Notice -->
+        <p class="privacy-notice">
+            🔹 **Privacy Notice:** Some apps may **block screenshots or screen recording** due to security policies.  
+            Please check your app’s security settings before scanning. If scanning doesn't work, **manually enter your details** below.
+        </p>
+
         <!-- Image Upload for OCR -->
-        <input type="file" id="insuranceCard" accept="image/*">
+        <input type="file" id="insuranceCard" accept="image/png, image/jpeg, image/jpg">
         <button class="upload-btn" onclick="scanInsuranceCard()">📷 Scan Insurance Card</button>
 
         <!-- Expanded Form for Better Quotes -->
@@ -139,75 +152,55 @@
 
     <script>
         function scanInsuranceCard() {
-    const fileInput = document.getElementById('insuranceCard');
-    const file = fileInput.files[0];
+            const fileInput = document.getElementById('insuranceCard');
+            const file = fileInput.files[0];
 
-    if (!file) {
-        alert("Please upload an image first.");
-        return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = function (event) {
-        const image = new Image();
-        image.src = event.target.result;
-
-        Tesseract.recognize(
-            image.src,
-            'eng',
-            {
-                logger: m => console.log(m)
-            }
-        ).then(({ data: { text } }) => {
-            console.log("OCR Output:", text);
-
-            // Normalize spaces & remove unnecessary characters
-            let cleanText = text.replace(/\s+/g, ' ').trim();
-
-            // Extract policy number (Ensures 6-12 digit format, prevents zip codes)
-            const policyMatch = cleanText.match(/\b\d{6,12}\b/g);
-            if (policyMatch) {
-                let validPolicyNumbers = policyMatch.filter(num => !num.startsWith("0")); // Remove leading zero cases
-                document.getElementById("policyNumber").value = validPolicyNumbers[0] || "";
+            if (!file) {
+                alert("Please upload an image first.");
+                return;
             }
 
-            // Extract insurance provider
-            const providerMatch = cleanText.match(/(Geico|Progressive|State Farm|Allstate|USAA|Liberty Mutual|Nationwide|Farmers|Alfa Insurance|Auto Insurance)/i);
-            if (providerMatch) {
-                document.getElementById("insuranceProvider").value = providerMatch[0];
-            }
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const image = new Image();
+                image.src = event.target.result;
 
-            // Extract coverage type
-            const coverageMatch = cleanText.match(/(Full\s*Coverage|Liability\s*Only)/i);
-            if (coverageMatch) {
-                document.getElementById("coverageType").value = coverageMatch[0];
-            }
+                Tesseract.recognize(
+                    image.src,
+                    'eng',
+                    {
+                        logger: m => console.log(m)
+                    }
+                ).then(({ data: { text } }) => {
+                    console.log("OCR Output:", text);
 
-            // Extract car year
-            const yearMatch = cleanText.match(/\b(19\d{2}|20\d{2})\b/);
-            if (yearMatch) {
-                document.getElementById("carYear").value = yearMatch[0];
-            }
+                    // Extract insurance provider
+                    const providerMatch = text.match(/(Geico|Progressive|State Farm|Allstate|USAA|Liberty Mutual|Nationwide|Farmers)/i);
+                    if (providerMatch) {
+                        document.getElementById("insuranceProvider").value = providerMatch[0];
+                    }
 
-            // Extract car make
-            const makeMatch = cleanText.match(/(Toyota|Ford|Chevrolet|Honda|Nissan|Hyundai|Jeep|Subaru|Volkswagen|Kia|Mazda|Dodge)/i);
-            if (makeMatch) {
-                document.getElementById("carMake").value = makeMatch[0];
-            }
+                    // Extract coverage type
+                    const coverageMatch = text.match(/(Full Coverage|Liability)/i);
+                    if (coverageMatch) {
+                        document.getElementById("coverageType").value = coverageMatch[0];
+                    }
 
-            // Extract car model
-            const modelMatch = cleanText.match(/(Corolla|Civic|F-150|Camry|Accord|Escape|Rav4|Silverado|Altima|Cherokee|Wrangler|Tucson|Jetta|Mazda3)/i);
-            if (modelMatch) {
-                document.getElementById("carModel").value = modelMatch[0];
-            }
+                    // Extract policy number (any sequence of 6-12 digits)
+                    const policyMatch = text.match(/\b\d{6,12}\b/);
+                    if (policyMatch) {
+                        document.getElementById("policyNumber").value = policyMatch[0];
+                    }
 
-        }).catch(error => {
-            console.error("OCR Error:", error);
-        });
-    };
+                    alert("OCR Scan Complete! Please review and edit details before submitting.");
+                }).catch(error => {
+                    console.error("OCR Error:", error);
+                    alert("Failed to scan the image. Please enter details manually.");
+                });
+            };
 
-    reader.readAsDataURL(file);
-}
+            reader.readAsDataURL(file);
+        }
     </script>
 </body>
 </html>
